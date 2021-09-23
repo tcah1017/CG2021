@@ -1,0 +1,3 @@
+Note that on some platforms you might have to alter the `include` statement in the DrawingWindow.h file from `"SDL.h"` to `"SDL2/SDL.h"`
+
+The code template (that we will introduce later in this workbook) comes bundled with the GLM library built-in, so there is no need for you to install this yourselves !

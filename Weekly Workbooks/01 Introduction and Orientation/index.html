@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>01 Introduction and Orientation</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">01 Introduction and Orientation</h1>
+</header>
+<h2 id="introduction-and-orientation">Introduction and Orientation</h2>
+<h3 id="weekly-briefing"><a href='https://web.microsoftstream.com/group/1dcf4e99-7117-4f18-9936-c5e6712daf00?view=videos' target='_blank'> Weekly Briefing <img src="../../resources/icons/briefing.png" /> </a></h3>
+<h3 id="task-1-introduction">Task 1: Introduction</h3>
+<p>The aim of this short introductory workbook is to ease everybody gently into the first week of term. The main objective is to make sure that you are able to build and run the code template that is the starting point for all of the work in this unit. Getting this working <em>might</em> take some time and perseverance to achieve (depending on the operating system you intend to use for this unit). It is <strong>ESSENTIAL</strong> that you achieve everything in this workbook during the first week of term. If you are unable to build and run applications, you will find yourself falling behind on this unit.</p>
+<p>If you didn’t manage to join the synchronous Teams briefing held earlier in the week, make sure you have watched the “Weekly Briefing” video linked to at the top of this page before attempting the tasks in this workbook !</p>
+<h1 id="section"></h1>
+<h3 id="task-2-language-and-libraries">Task 2: Language and Libraries</h3>
+<p>The implementation language for this unit will be C/C++. Everybody will have their own preferred language for writing code, however C/C++ is very much the standard for low-level graphics rendering applications. If we didn’t use this as the primary language for this unit, potential employers would think it very unusual.</p>
+<p>The aim of this unit is to develop a fundamental understanding of graphics rendering and as such, we will not be making use of any existing rendering frameworks (but rather, building our own !) That said, the practical exercises will make use of the following two external libraries: - <a href="http://glm.g-truc.net">GLM</a> for general purpose mathematical operations (mostly for manipulating vectors and matrices) - <a href="http://www.libsdl.org">SDL2</a> for drawing to the screen (mostly setting the colour of individual pixels !)</p>
+<p>Remember: The aim of this unit is to learn to build things from the ground-up, so don’t use anything other than SDL2 and GLM when implementing the practical exercises.</p>
+<p>In order to make things a little tidier, we have provided a “wrapper” object around SDL2 called <em>DrawingWindow</em> . This wrapper initialises SDL, opens up a window for drawing to the screen and then provides various methods for drawing and interacting with the user. The <em>DrawingWindow</em> object has the following methods:</p>
+<ul>
+<li>DrawingWindow: A constructor for the drawing window that takes 3 parameters:
+<ul>
+<li>Horizontal resolution for the window (integer width)</li>
+<li>Vertical resolution for the window (integer height)</li>
+<li>Whether or not to show the window in full-screen mode (boolean)</li>
+</ul></li>
+<li>setPixelColour: sets an individual pixel (indicated by x and y coordinates) to a specified colour (a packed ARGB value)</li>
+<li>getPixelColour: returns the colour of the pixel indicated by x and y coordinates</li>
+<li>renderFrame: draws all pixels to the screen (until you call this, all pixel changes are just in a memory buffer)</li>
+<li>savePPM: saves the currently rendered content of the window to a .ppm image file</li>
+<li>saveBMP: saves the currently rendered content of the window to a .bmp image file</li>
+<li>clearPixels: clears all pixel colours (from the whole window)</li>
+<li>pollForInputEvents: checks to see if there are any events waiting to be processed (returns true if there are !)</li>
+</ul>
+<p>Examples of how to call the methods of the DrawingWindow class are included in the template project introduced later in this workbook.</p>
+<h1 id="section-1"></h1>
+<h3 id="task-3-using-your-own-computer-with-an-existing-os">Task 3: Using Your Own Computer with an Existing OS</h3>
+<p>We have tried to use a programming environment that is agnostic to the underlying architecture and operating system as possible (so it should be <em>fairly</em> straight-forward to get it running on most machines !) We will test and mark assignment on the lab machines so you should not use any platform-specific features. If you use an IDE (Visual Studio, Eclipse, XCode etc) make sure that your project compiles without it (i.e. by providing a Make file that works on the lab machines).</p>
+<p>Installation of SDL2 can sometimes be non-trivial, due to the fact that it must link with native graphics libraries. For this reason, the recommended way to install it is using a package manager (e.g. apt, rpm, yum, brew, ports, pacman etc). The name of the required SDL2 package will vary depending on your package manager. Here are some likely candidates for a range of different package managers:</p>
+<pre><code>apt install libsdl2-dev
+rpm -i SDL2-devel
+yum install SDL2-devel
+brew install sdl2
+port install libsdl2
+pacman -S sdl2</code></pre>
+<p>If you can’t get your package manager to install SDL2 (or if you don’t have a package manager at all !) then you will have to install it manually. Various useful resources are available online, including <a href="https://lazyfoo.net/tutorials/SDL/01_hello_SDL/" target="_blank"> this tutorial to use your existing C++ compiler</a>, or alternatively <a href="https://seis.bristol.ac.uk/~sl17668/sdl-install.pdf" target="_blank"> this guide for a “clean slate” Visual Studio install</a>. If you are really struggling to install SDL on your existing operating system, then the following sections provide some alternative approaches you might like to consider.</p>
+<p><strong>Hints &amp; Tips:</strong><br />
+Note that on some platforms you might have to alter the <code>include</code> statement in the DrawingWindow.h file from <code>"SDL.h"</code> to <code>"SDL2/SDL.h"</code></p>
+<p>The code template (that we will introduce later in this workbook) comes bundled with the GLM library built-in, so there is no need for you to install this yourselves !</p>
+<h1 id="section-2"></h1>
+<h3 id="task-4-using-your-own-computer-with-a-fresh-os">Task 4: Using Your Own Computer with a Fresh OS</h3>
+<p>If you are having difficulties installing SDL2 on your existing operating system, you might find things easier using a fresh operating system install. We have created a <a href="Vagrantfile" target="_blank">Vagrant Box configuration file</a> that can be used to bring up a virtual machine with all of the required tools and libraries installed. See the comments at the top of the configuration file for instructions on how to get started with Vagrant.</p>
+<p>Alternatively (if you are confident to do so) it might be worth considering a “fresh” install of your preferred linux distribution. It should be relatively straight-forward to install SDL2 on a clean linux install using a decent package manager. You even might like to consider dual booting your computer (if you are brave enough to do so !)</p>
+<p><strong>Hints &amp; Tips:</strong><br />
+If using a virtual machine, you should avoid using display scaling (i.e. use VirtualBox in 100% “Unscaled Output” mode) otherwise you may experience a reduction in window manager performance.</p>
+<h1 id="section-3"></h1>
+<h3 id="task-5-using-the-lab-machines">Task 5: Using the Lab Machines</h3>
+<p>As an alternative to getting SDL2 installed on your own computer, you might choose to compile and run your code on the lab machines in MVB (which have all of the required software installed). The lab machines can either be used physically (whilst you are actually in the lab) or remotely (via remote desktop services). In order to gain remote access you will need to use the <em>X2Go</em> client. Full instructions for installing and running the <em>X2Go</em> client can be found in <a href="https://uob.sharepoint.com/sites/itservices/SitePages/fits-engineering-linux-x2go.aspx" target="_blank">this how-to guide</a>. It is worth noting however that the quality of your experience using this approach will vary depending on the quality of your internet connection.</p>
+<p><strong>Hints &amp; Tips:</strong><br />
+For help resolving problems with remote access to the lab machines, check out the <a href="https://uob.sharepoint.com/sites/itservices/SitePages/contacts.aspx" target="_blank">IT services help page</a> in particular the rapid response teaching support helpline !</p>
+<p>If you get a warning that <code>GLX is not supported</code> when remote logging in to the lab machines using X2Go then you will need to disable hardware acceleration in the <code>RedNoise</code> project. Open the <code>libs/sdw/DrawingWindow.cpp</code> file and change the line <code>uint32_t flags = SDL_WINDOW_OPENGL;</code> so that it now reads <code>uint32_t flags = SDL_WINDOW_FOREIGN;</code> This will disable hardware acceleration and <em>should</em> solve the problem - it may run more slowly, but at least it will run !</p>
+<h1 id="section-4"></h1>
+<h3 id="task-6-the-template-project">Task 6: The Template Project</h3>
+<p>In order to help get you started, we have provided a sample project called <a href="../../RedNoise.zip" target="_blank">RedNoise</a>. This project provides the structure that you will need for each weekly workbook, as well as illustrating the use of the <em>DrawingWindow</em> methods. You should use this template as a starting point for each practical exercise. Do be sure however to change the name of the project (you don’t want to have a bunch of projects all called <em>RedNoise</em> !).</p>
+<p>In order to help you compile, link and run your code, a <a href="../../RedNoise/Makefile" target="_blank">Makefile</a> has been provided as part of the template project. Be sure you update the <code>PROJECT_NAME</code> on the first line of the Makefile to match the name of your project/main class each week. This Makefile has multiple build rules for different purposes:</p>
+<ul>
+<li>debug: A development build rule that will compile and link your project for use with a debugger (gdb)</li>
+<li>diagnostic: A development build rule that includes extra memory checking and diagnosis flags.<br />
+Note: this rule requires the <a href="https://clang.llvm.org/docs/AddressSanitizer.html" target="_blank">Address Sanitizer</a> library to be installed (which comes built-in with some C++ compilers)</li>
+<li>speedy: A build rule that will result in an optimised “high performance” executable (to make interaction testing quicker and easier)</li>
+<li>production: A build rule to make an executable without debug hooks (for release or distribution)</li>
+</ul>
+<p>Just typing <code>make</code> on its own will build the project using the <em>debug</em> rule and run the resultant executable.</p>
+<p>When you have successfully built and run the <em>RedNoise</em> project you should see a window that looks like the following…</p>
+<p><img src="06%20The%20Template%20Project/images/RedNoise.gif" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+Depending the setup of the computer that you are using, you may need to edit the <em>Makefile</em> in order to change the compiler used to build the project (currently the project uses <code>clang++</code> but you may need to change this to <code>g++</code> or <code>cl</code> depending on what you have installed).</p>
+<p>A <a href="../../RedNoise/CMakeLists.txt" target="_blank">CMake build file</a> is also included in the <em>RedNoise</em> project (in case you prefer using <em>CMake</em> rather than <em>Make</em>). Details of how to use <em>CMake</em> are included as comments at the top of the file. This configuration file will also allow you to import and automatically configure the project in C++ IDEs (such as <em>CLion</em>).</p>
+<p>Note that on some platforms you may need to include <code>&lt;cstring&gt;</code> in the DrawingWindow class (if the compiler complains that it can’t find <code>memset</code>).</p>
+<p>Remember that the cleanest way to quit an SDL application is by pressing the ESC key ! If you have a window that you can’t close (which does happen from time to time), you may need to kill off the process manually using Task Manager, Activity Monitor or the kill/killall command (depending on your platform).</p>
+<h1 id="section-5"></h1>
+<h3 id="task-7-understanding-the-template">Task 7: Understanding the Template</h3>
+<p>It is useful to spend a little time getting to know the structure of the <a href="../../RedNoise/src/RedNoise.cpp" target="_blank">main class</a> in the template project. We are going to be using it a lot over the next few weeks, so it is going to be important. The main function in the template contains a “forever” loop which:</p>
+<ol type="1">
+<li>Polls the event queue for incoming mouse and keyboard events</li>
+<li>Draws the scene to the screen memory buffer</li>
+<li>Renders the memory buffer onto the SDL window</li>
+</ol>
+<p>Drawing the scene onto the screen buffer basically involves looping through a pixel at a time, deciding what colour it should be, packing that colour into an integer and setting the relevant pixel to that colour. The <em>RedNoise</em> example just creates a random pattern of red pixels of varying brightness. This may seem a bit pointless, but it does allow us to make sure that the code in actually running. In later weeks we are going to do more sophisticated (and more useful) things with the pixels !</p>
+<p>You will note from the <code>handleEvent</code> method that it is possible to respond to both mouse and keyboard events. In the <em>RedNoise</em> example key, presses simply print out messages to the terminal (by directing strings to the <code>cout</code> object). In later weeks we are going to use these event handlers to allow the user to navigate around a scene and switch between different rendering modes. For the time being however, just printing out messages is fine.</p>
+<p>Clicking the mouse inside the SDL window will cause a screenshot of the current content of the window to be saved to the filesystem. You will notice that both PPM and BMP files are generated. The reason for this is that some platforms and applications can be fussy about the format of these image files. Pick whichever file format works best on your platform and work with that.</p>
+<h1 id="section-6"></h1>
+<p>End of Workbook</p>
+</body>
+</html>

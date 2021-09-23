@@ -1,0 +1,13 @@
+We have tried to use a programming environment that is agnostic to the underlying architecture and operating system as possible (so it should be _fairly_ straight-forward to get it running on most machines !) We will test and mark assignment on the lab machines so you should not use any platform-specific features.  If you use an IDE (Visual Studio, Eclipse, XCode etc) make sure that your project compiles without it (i.e. by providing a Make file that works on the lab machines).
+
+Installation of SDL2 can sometimes be non-trivial, due to the fact that it must link with native graphics libraries. For this reason, the recommended way to install it is using a package manager (e.g. apt, rpm, yum, brew, ports, pacman etc). The name of the required SDL2 package will vary depending on your package manager. Here are some likely candidates for a range of different package managers:
+```
+apt install libsdl2-dev
+rpm -i SDL2-devel
+yum install SDL2-devel
+brew install sdl2
+port install libsdl2
+pacman -S sdl2
+```
+
+If you can't get your package manager to install SDL2 (or if you don't have a package manager at all !) then you will have to install it manually. Various useful resources are available online, including <a href="https://lazyfoo.net/tutorials/SDL/01_hello_SDL/" target="_blank"> this tutorial to use your existing C++ compiler</a>, or alternatively <a href="https://seis.bristol.ac.uk/~sl17668/sdl-install.pdf" target="_blank"> this guide for a "clean slate" Visual Studio install</a>. If you are really struggling to install SDL on your existing operating system, then the following sections provide some alternative approaches you might like to consider.
